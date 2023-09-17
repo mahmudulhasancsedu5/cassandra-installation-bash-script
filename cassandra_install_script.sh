@@ -15,18 +15,20 @@ else
 fi
 
 USER_HOME=`echo ~` # '.' # Find current user home directory path
-DOT_PROFILE="$USER_HOME/.profile" # "./.profile" # test
+# DOT_PROFILE="$USER_HOME/.profile" # "./.profile" # test
+BASH_RC="$USER_HOME/.bashrc" # ". .bashrc" # test
 
-echo "Need to set $OPENJDK_VERSION environment variable in $DOT_PROFILE"
-if [ -d $JAVA_HOME_DIR ]; then
-	cd
-	pwd
-	echo "Java is installed properly. Set environment variable JAVA_HOME"
-	echo "export JAVA_HOME=$JAVA_HOME_DIR" >> $DOT_PROFILE
-	echo 'export PATH=$JAVA_HOME/bin:$PATH' >> $DOT_PROFILE
-	. .profile # source $DOT_PROFILE
-else 
-	echo "Java Installed folder not found"
+echo "Need to set $OPENJDK_VERSION environment variable in $BASH_RC"
+JAVA_HOME_TEXT='JAVA_HOME'
+
+if grep -F "$JAVA_HOME_TEXT" $BASH_RC
+then
+    	echo "$JAVA_HOME_TEXT is already in environment PATH"
+else
+	cd $USER_HOME
+	echo "export JAVA_HOME=$JAVA_HOME_DIR" >> $BASH_RC
+	echo 'export PATH=$JAVA_HOME/bin:$PATH' >> $BASH_RC
+    	. $BASH_RC
 fi
 
 echo "JAVA_HOME directory: $JAVA_HOME_DIR"

@@ -40,16 +40,16 @@ SEEDS[1]='192.168.0.103'
 
 # update cassandra configuration
 
-sudo sed -i "s/cluster_name: 'Test Cluster'/cluster_name: 'AWS Cassandra Cluster'/g" $CASSANDRA_YAML
-sudo sed -i "s/listen_address: localhost/listen_address: $IP_ADDRESS/g" $CASSANDRA_YAML
-sudo sed -i "s/rpc_address: localhost/rpc_address: $IP_ADDRESS/g" $CASSANDRA_YAML
+sed -i "s/cluster_name: 'Test Cluster'/cluster_name: 'AWS Cassandra Cluster'/g" $CASSANDRA_YAML
+sed -i "s/listen_address: localhost/listen_address: $IP_ADDRESS/g" $CASSANDRA_YAML
+sed -i "s/rpc_address: localhost/rpc_address: $IP_ADDRESS/g" $CASSANDRA_YAML
 
 
 function join { local IFS=","; shift; echo "$*"; }
 
 ALL_SEEDS=`join , ${SEEDS[@]}`
 
-sudo sed -i 's/- seeds: "127.0.0.1:7000"/- seeds: "'${ALL_SEEDS[@]}'"/g' $CASSANDRA_YAML
+sed -i 's/- seeds: "127.0.0.1:7000"/- seeds: "'${ALL_SEEDS[@]}'"/g' $CASSANDRA_YAML
 
 echo "cassandra setup: completed"
 echo "apache cassandra version: $CASSANDRA_VERSION"

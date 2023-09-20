@@ -39,16 +39,16 @@ SEEDS[1]='192.168.0.103'
 
 # update cassandra configuration
 
-sudo sed -i "s/cluster_name: 'Depart Cluster'/cluster_name: 'AWS Depart Cluster'/g" $CASSANDRA_YAML
-sudo sed -i "s/listen_address: 192.168.0.103/listen_address: $IP_ADDRESS/g" $CASSANDRA_YAML
-sudo sed -i "s/rpc_address: 192.168.0.103/rpc_address: $IP_ADDRESS/g" $CASSANDRA_YAML
+sed -i "s/cluster_name: 'Depart Cluster'/cluster_name: 'AWS Depart Cluster'/g" $CASSANDRA_YAML
+sed -i "s/listen_address: 192.168.0.103/listen_address: $IP_ADDRESS/g" $CASSANDRA_YAML
+sed -i "s/rpc_address: 192.168.0.103/rpc_address: $IP_ADDRESS/g" $CASSANDRA_YAML
 
 
 function join { local IFS=","; shift; echo "$*"; }
 
 ALL_SEEDS=`join , ${SEEDS[@]}`
 
-sudo sed -i 's/- seeds: "192.168.0.103,192.168.0.105"/- seeds: "'${ALL_SEEDS[@]}'"/g' $CASSANDRA_YAML
+sed -i 's/- seeds: "192.168.0.103,192.168.0.105"/- seeds: "'${ALL_SEEDS[@]}'"/g' $CASSANDRA_YAML
 
 echo "depart setup: completed"
 echo "DEPART_HOME: $DEPART_HOME"

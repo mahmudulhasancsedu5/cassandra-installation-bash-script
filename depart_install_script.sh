@@ -2,7 +2,7 @@
 set -x
 
 #install wget
-WGET_PATH=`which curl`
+WGET_PATH=`which wget`
 
 if [ -z $WGET_PATH ]; then
 	echo 'wget is not installed'
@@ -13,7 +13,7 @@ else
 fi
 
 # install unzip
-UNZIP_PATH=`which curl`
+UNZIP_PATH=`which unzip`
 
 if [ -z $UNZIP_PATH ]; then
 	echo 'unzip is not installed'

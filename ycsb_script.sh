@@ -29,6 +29,21 @@ else
 	echo 'tar is installed'
 fi
 
+
+PYTHON=`which python`
+
+if [ -z $PYTHON ]; then
+	echo 'python2.7 is not installed'
+	echo 'Install python2.7'
+	sudo apt-get install python2.7 -y
+	sudo ln -sf /usr/bin/python2.7 /usr/bin/python
+
+else
+	echo 'tar is installed'
+fi
+
+
+
 cd $USER_HOME
 
 if [ ! -d $YCSB_DIR ]; then

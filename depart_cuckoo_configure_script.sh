@@ -4,7 +4,7 @@ set -x
 
 USER_HOME=`echo ~`
 
-DEPART_HOME="$USER_HOME/depart"
+DEPART_HOME="$USER_HOME/depart_cuckoo"
 
 # Cnfigure cassandra
 
@@ -37,23 +37,30 @@ IP_ADDRESS=`hostname -I` # for ec2 machine private ip will be cassandra node IP_
 SEEDS[0]='192.168.0.105'
 SEEDS[1]='192.168.0.103'
 
+#IP_ADDRESS=localhost # for ec2 machine private ip will be cassandra node IP_ADDRESS
+#SEEDS[0]='127.0.0.1'
+#SEEDS[1]='192.168.0.103'
+
 # update cassandra configuration
 
-sed -i "s/cluster_name: 'Depart Cluster'/cluster_name: 'AWS Depart Cluster'/g" $CASSANDRA_YAML
-sed -i "s/listen_address: 192.168.0.103/listen_address: $IP_ADDRESS/g" $CASSANDRA_YAML
-sed -i "s/rpc_address: 192.168.0.103/rpc_address: $IP_ADDRESS/g" $CASSANDRA_YAML
-sed -i "s/num_tokens: 256/num_tokens: 16/g" $CASSANDRA_YAML
+sed -i "s/cluster_name: 'Test Cluster'/cluster_name: 'AWS DepartCuckoo Cluster'/g" $CASSANDRA_YAML
+sed -i "s/listen_address: 127.0.0.1/listen_address: $IP_ADDRESS/g" $CASSANDRA_YAML
+sed -i "s/rpc_address: 127.0.0.1/rpc_address: $IP_ADDRESS/g" $CASSANDRA_YAML
+sed -i "s/num_tokens: 1/num_tokens: 16/g" $CASSANDRA_YAML
+sed -i "s/broadcast_rpc_address: 18.220.232.203/#broadcast_rpc_address: 1.2.3.4/g" $CASSANDRA_YAML
+sed -i "s/initial_token: -9223372036854775808/#initial_token: /g" $CASSANDRA_YAML
+
 
 
 function join { local IFS=","; shift; echo "$*"; }
 
 ALL_SEEDS=`join , ${SEEDS[@]}`
 
-sed -i 's/- seeds: "192.168.0.103,192.168.0.105"/- seeds: "'${ALL_SEEDS[@]}'"/g' $CASSANDRA_YAML
+sed -i 's/- seeds: "127.0.0.1"/- seeds: "'${ALL_SEEDS[@]}'"/g' $CASSANDRA_YAML
 
-echo "depart setup: completed"
-echo "DEPART_HOME: $DEPART_HOME"
-echo "start depart cmd: bin/cassandra -f"
+echo "depart_cuckoo setup: completed"
+echo "cuckoo_HOME: $DEPART_HOME"
+echo "start cuckoo cmd: bin/cassandra -f"
 echo "exit cassndra: (ctl + c)"
 
 

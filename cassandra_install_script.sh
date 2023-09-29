@@ -74,11 +74,13 @@ fi
 # Dowload cassandra
 cd $CASSANDRA_DIR
 
-CASSANDRA_VERSION="4.0.11"
+#https://www.apache.org/dyn/closer.lua/cassandra/3.11.16/apache-cassandra-3.11.16-bin.tar.gz
+CASSANDRA_VERSION='3.11.16' # "4.0.11"
 TARBALL_NAME="apache-cassandra-$CASSANDRA_VERSION-bin.tar.gz"
 CASSANDRA_FOLDER_NAME="apache-cassandra-$CASSANDRA_VERSION"
 CASSANDRA_HOME="$CASSANDRA_DIR/$CASSANDRA_FOLDER_NAME"
 TARBALL_URL="https://archive.apache.org/dist/cassandra/$CASSANDRA_VERSION/$TARBALL_NAME"
+
 
 if [ ! -f "$CASSANDRA_DIR/$TARBALL_NAME" ]; then
 	echo 'Download cassandra'

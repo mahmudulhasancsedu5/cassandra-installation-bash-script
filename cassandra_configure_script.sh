@@ -1,7 +1,7 @@
 set -x
 
 # make dir for cassandra
-CASSANDRA_VERSION="4.0.11"
+CASSANDRA_VERSION="3.11.16"
 CASSANDRA_FOLDER_NAME="apache-cassandra-$CASSANDRA_VERSION"
 USER_HOME=`echo ~`
 CASSANDRA_DIR="$USER_HOME/cassandra"
